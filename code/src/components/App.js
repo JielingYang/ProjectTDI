@@ -75,12 +75,8 @@ class App extends Component<AppPropsType>
 
     appResize(props)
     {
-        let viewportMin: number = window.innerWidth < window.innerHeight
-                                  ? window.innerWidth
-                                  : window.innerHeight;
-
         props.commonAction_changeWidthAndHeight(window.innerWidth, window.innerHeight, REDUCER_NAME.APP_REDUCER);
-        props.appAction_requestToUpdateAppPerspective(viewportMin * 0.8);
+        props.appAction_requestToUpdateAppPerspective();
     }
 }
 

@@ -3,8 +3,10 @@ import {createReducer} from "./reducerCreator";
 import {COMMON_ACTION_TYPE} from "../actions/commonActions";
 import {APP_ACTION_TYPE} from "../actions/appActions";
 import {APP_REFRESHING_TIME_GAP} from "../utilities/CONSTANTS_TIME";
+import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
 
 export type appStateType = {
+    reducerName: REDUCER_NAME,
     width: number,
     height: number,
     left: number,
@@ -15,6 +17,7 @@ export type appStateType = {
 }
 
 const appDefaultState: appStateType = {
+    reducerName: REDUCER_NAME.APP_REDUCER,
     width: 0,
     height: 0,
     left: 0,
@@ -28,10 +31,14 @@ const appDefaultState: appStateType = {
 const appReducerHandlers = {
     [COMMON_ACTION_TYPE.CHANGE_WIDTH_AND_HEIGHT]: (state: appStateType, action) =>
     {
-        let nextState: appStateType = deepCopy(state);
-        nextState.width = action.newWidth;
-        nextState.height = action.newHeight;
-        return nextState;
+        if (action.reducerName === state.reducerName)
+        {
+            let nextState: appStateType = deepCopy(state);
+            nextState.width = action.newWidth;
+            nextState.height = action.newHeight;
+            return nextState;
+        }
+        return state;
     },
     [APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP]: (state: appStateType, action) =>
     {

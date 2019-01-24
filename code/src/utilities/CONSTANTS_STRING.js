@@ -2,6 +2,8 @@ import {ENGINE_PART_INDICES, INDEX, MAIN_MENU_ITEMS_INDICES, THEME_INDICES} from
 
 export const REDUCER_NAME = Object.freeze({
     APP_REDUCER: "APP_REDUCER",
+    MODEL_REDUCER: "MODEL_REDUCER",
+    MODELS_LIST_REDUCER: "MODELS_LIST_REDUCER",
 });
 
 export const ID = Object.freeze({

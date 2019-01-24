@@ -26,22 +26,3 @@ export const createReducer = (defaultState: Object, handlers: Object) =>
         }
     };
 };
-
-/**
- *
- * @param reducer
- * @param reducerName
- * @returns reducer Function that represents created reducer
- */
-export const wrapReducerWithName = (reducer, reducerName) =>
-{
-    return (state, action) =>
-    {
-        if (action.reducerName !== reducerName && state !== undefined)
-        {
-            return state
-        }
-
-        return reducer(state, action);
-    }
-};

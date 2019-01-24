@@ -1,4 +1,3 @@
-import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
 import type {appStateType} from "../reducers/appReducer";
 
 export const APP_ACTION_TYPE = Object.freeze({
@@ -15,7 +14,6 @@ const appAction_updateAppMaximumRefreshingTimeGap = (newMaximumRefreshingTimeGap
     return {
         type: APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP,
         newMaximumRefreshingTimeGap: newMaximumRefreshingTimeGap,
-        reducerName: REDUCER_NAME.APP_REDUCER,
     };
 };
 
@@ -24,7 +22,6 @@ const appAction_updateAppMouseMoveEventTimeStamp = (newMouseMoveEventTimeStamp: 
     return {
         type: APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_MOUSE_MOVE_EVENT_TIME_STAMP,
         newMouseMoveEventTimeStamp: newMouseMoveEventTimeStamp,
-        reducerName: REDUCER_NAME.APP_REDUCER,
     };
 };
 
@@ -33,7 +30,6 @@ const appAction_updateAppPerspective = (newPerspective: number) =>
     return {
         type: APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_PERSPECTIVE,
         newPerspective: newPerspective,
-        reducerName: REDUCER_NAME.APP_REDUCER,
     };
 };
 
@@ -67,10 +63,17 @@ export const appAction_requestToUpdateAppPerspective = (newPerspective: number) 
     return (dispatch, getState) =>
     {
         let appState: appStateType = getState().appState;
+        let viewportMin: number = window.innerWidth < window.innerHeight
+                                  ? window.innerWidth
+                                  : window.innerHeight;
+        let defaultPerspective: number = viewportMin * 0.8;
+        let perspective: number = newPerspective === undefined
+                                  ? defaultPerspective
+                                  : newPerspective;
 
-        if (newPerspective !== appState.perspective)
+        if (perspective !== appState.perspective)
         {
-            dispatch(appAction_updateAppPerspective(newPerspective));
+            dispatch(appAction_updateAppPerspective(perspective));
         }
     };
 };
