@@ -88,11 +88,6 @@ export const MAIN_MENU_ITEM_NAME = "maniMenuItem";
 /* Strings grouped by object */
 /*****************************/
 
-export const COMMON_TYPE = Object.freeze({
-    DEFAULT: "default",
-    EMPTY: "empty",
-});
-
 /****************************/
 /* Strings grouped by array */
 /****************************/

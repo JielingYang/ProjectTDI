@@ -1,12 +1,16 @@
 import {DEFAULT_FONT_COLOR} from "../utilities/CONSTANTS_COLOR";
-import {COMMON_TYPE} from "../utilities/CONSTANTS_STRING";
 import {DEFAULT_FONT_SIZE} from "../utilities/CONSTANTS_NUMBER";
+
+export const STYLE_OBJECT_INITIAL_TYPE = Object.freeze({
+    DEFAULT: "default",
+    EMPTY: "empty",
+});
 
 export default class StyleObject
 {
-    constructor(initialType: COMMON_TYPE)
+    constructor(initialType: STYLE_OBJECT_INITIAL_TYPE)
     {
-        if (initialType === undefined || initialType === COMMON_TYPE.DEFAULT)
+        if (initialType === undefined || initialType === STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         {
             // Default styles
             this.style = {
@@ -17,7 +21,7 @@ export default class StyleObject
                 color: DEFAULT_FONT_COLOR,
             };
         }
-        else if (initialType === COMMON_TYPE.EMPTY)
+        else if (initialType === STYLE_OBJECT_INITIAL_TYPE.EMPTY)
         {
             this.style = {};
         }
@@ -35,7 +39,7 @@ export default class StyleObject
 
     clone(): StyleObject
     {
-        let result: StyleObject = new StyleObject(COMMON_TYPE.EMPTY);
+        let result: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.EMPTY);
         result.setStyle(Object.assign({}, this.getStyle()));
         return result;
     }
