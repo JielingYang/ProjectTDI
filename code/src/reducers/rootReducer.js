@@ -1,8 +1,10 @@
 import {combineReducers} from "redux";
-import appReducer from "../../../../HomePageProject/react-client/src/reducers/appReducer";
+import appReducer from "./appReducer";
+import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
+import {wrapReducerWithName} from "./reducerCreator";
 
 const rootReducer = combineReducers({
-    appState: appReducer,
+    appState: wrapReducerWithName(appReducer, REDUCER_NAME.APP_REDUCER),
 });
 
 export default rootReducer;

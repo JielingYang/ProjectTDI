@@ -1,5 +1,9 @@
 import {ENGINE_PART_INDICES, INDEX, MAIN_MENU_ITEMS_INDICES, THEME_INDICES} from "./CONSTANTS_NUMBER";
 
+export const REDUCER_NAME = Object.freeze({
+    APP_REDUCER: "APP_REDUCER",
+});
+
 export const ID = Object.freeze({
     APP_ID: "appComponent",
 
