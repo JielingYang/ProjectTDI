@@ -12,7 +12,7 @@ export const CLASS_NAMES = Object.freeze({
  */
 export const deepCopy = (originalObject) =>
 {
-    if(originalObject instanceof BaseModel)
+    if (originalObject instanceof BaseModel)
     {
         return originalObject.deepClone();
     }
@@ -88,4 +88,11 @@ export const isEven: boolean = (number: number) =>
 export const isUndefineOrNull: boolean = (target) =>
 {
     return target === undefined || target === null
+};
+
+export const getViewportMin: number = () =>
+{
+    return window.innerWidth < window.innerHeight
+           ? window.innerWidth
+           : window.innerHeight;
 };

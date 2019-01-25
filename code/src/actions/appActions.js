@@ -1,4 +1,5 @@
 import type {appStateType} from "../reducers/appReducer";
+import {modelsAxisAction_requestToUpdateAxisRotationXY} from "./modelsAxisActions";
 
 export const APP_ACTION_TYPE = Object.freeze({
     APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP: "APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP",
@@ -27,7 +28,7 @@ const appAction_updateAppMouseMoveEventTimeStamp = (newMouseMoveEventTimeStamp: 
 /* ************************** Requesting actions ****************************************** */
 /* This kind of actions check on new data to decide whether to call updating actions or not */
 /* **************************************************************************************** */
-export const appAction_requestToUpdateAppMouseMoveRelatedData = (newMouseMoveEventTimeStamp: number, mouseMoveX: number, mouseMoveY: number) =>
+export const appAction_requestToUpdateAppMouseMoveRelatedData = (newMouseMoveEventTimeStamp: number, newMouseMoveX: number, newMouseMoveY: number) =>
 {
     return (dispatch, getState) =>
     {
@@ -44,7 +45,7 @@ export const appAction_requestToUpdateAppMouseMoveRelatedData = (newMouseMoveEve
         if (currentTimestamp - previousTimestamp >= appMaximumRefreshingTimeGap)
         {
             dispatch(appAction_updateAppMouseMoveEventTimeStamp(currentTimestamp)); // Update timestamp to prepare next check
-            // dispatch(engineAction_requestToUpdateEngineRotation(mouseMoveX, mouseMoveY));
+            dispatch(modelsAxisAction_requestToUpdateAxisRotationXY(newMouseMoveX, newMouseMoveY));
         }
     };
 };

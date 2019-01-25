@@ -3,8 +3,9 @@ import {createReducer} from "./reducerCreator";
 import {COMMON_ACTION_TYPE} from "../actions/commonActions";
 import type {appStateType} from "./appReducer";
 import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
+import {MODELS_AXIS_ACTION_TYPE} from "../actions/modelsAxisActions";
 
-export type modelStateType = {
+export type modelsAxisStateType = {
     reducerName: string,
     width: number,
     height: number,
@@ -14,12 +15,10 @@ export type modelStateType = {
     rotationX: number,
     rotationY: number,
     rotationZ: number,
-    isSelected: boolean,
-    isMouseOver: boolean,
 }
 
-export const modelDefaultState: modelStateType = {
-    reducerName: REDUCER_NAME.MODEL_REDUCER,
+export const modelDefaultState: modelsAxisStateType = {
+    reducerName: REDUCER_NAME.MODELS_AXIS_REDUCER,
     width: 0,
     height: 0,
     left: 0,
@@ -28,13 +27,11 @@ export const modelDefaultState: modelStateType = {
     rotationX: 0,
     rotationY: 0,
     rotationZ: 0,
-    isSelected: false,
-    isMouseOver: false,
 };
 
 // Check reducerCreator for explanation of handlers
 const modelReducerHandlers = {
-    [COMMON_ACTION_TYPE.CHANGE_WIDTH_AND_HEIGHT]: (state: modelStateType, action) =>
+    [COMMON_ACTION_TYPE.CHANGE_WIDTH_AND_HEIGHT]: (state: modelsAxisStateType, action) =>
     {
         if (action.reducerName === state.reducerName)
         {
@@ -45,7 +42,7 @@ const modelReducerHandlers = {
         }
         return state;
     },
-    [COMMON_ACTION_TYPE.CHANGE_LEFT_AND_TOP]: (state: modelStateType, action) =>
+    [COMMON_ACTION_TYPE.CHANGE_LEFT_AND_TOP]: (state: modelsAxisStateType, action) =>
     {
         if (action.reducerName === state.reducerName)
         {
@@ -55,6 +52,13 @@ const modelReducerHandlers = {
             return nextState;
         }
         return state;
+    },
+    [MODELS_AXIS_ACTION_TYPE.MODELS_AXIS_ACTION_UPDATE_AXIS_ROTATION_X_Y]: (state: modelsAxisStateType, action) =>
+    {
+        let nextState: modelsAxisStateType = deepCopy(state);
+        nextState.rotationX = action.newRotationX;
+        nextState.rotationY = action.newRotationY;
+        return nextState;
     },
 };
 

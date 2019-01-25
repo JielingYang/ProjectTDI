@@ -38,7 +38,7 @@ const modelsContainerReducerHandlers = {
             nextState.height = action.newHeight;
             return nextState;
         }
-        else if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0)
+        else if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0 && action.reducerIndex < state.allModels.length)
         {
             let nextState: modelsContainerStateType = deepCopy(state);
             nextState.allModels[action.reducerIndex] = modelReducer(nextState.allModels[action.reducerIndex], action);
@@ -55,7 +55,7 @@ const modelsContainerReducerHandlers = {
             nextState.top = action.newTop;
             return nextState;
         }
-        else if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0)
+        else if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0 && action.reducerIndex < state.allModels.length)
         {
             let nextState: modelsContainerStateType = deepCopy(state);
             nextState.allModels[action.reducerIndex] = modelReducer(nextState.allModels[action.reducerIndex], action);
