@@ -1,17 +1,14 @@
-import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
-
-export const MODELS_LIST_ACTION_TYPE = Object.freeze({
-    MODELS_LIST_ACTION_ADD_MODEL: "MODELS_LIST_ACTION_ADD_MODEL",
+export const MODEL_ACTION_TYPE = Object.freeze({
+    MODEL_ACTION_CHANGE_MODEL_WIDTH_AND_HEIGHT: "MODEL_ACTION_CHANGE_MODEL_WIDTH_AND_HEIGHT",
 });
 
 /* **************************** Updating actions ***************************** */
 /* This kind of actions send new data to reducer directly and contain no logic */
 /* *************************************************************************** */
-const modelsListAction_addModel = () =>
+export const modelAction_changeModelWidthAndHeight = (newWidth: number, newHeight: number) =>
 {
     return {
-        type: MODELS_LIST_ACTION_TYPE.MODELS_LIST_ACTION_ADD_MODEL,
-        reducerName: REDUCER_NAME.MODELS_LIST_REDUCER,
+        type: MODEL_ACTION_TYPE.MODEL_ACTION_CHANGE_MODEL_WIDTH_AND_HEIGHT,
     };
 };
 

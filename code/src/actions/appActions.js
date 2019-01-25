@@ -3,7 +3,6 @@ import type {appStateType} from "../reducers/appReducer";
 export const APP_ACTION_TYPE = Object.freeze({
     APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP: "APP_ACTION_UPDATE_APP_MAXIMUM_REFRESHING_TIME_GAP",
     APP_ACTION_UPDATE_APP_MOUSE_MOVE_EVENT_TIME_STAMP: "APP_ACTION_UPDATE_APP_MOUSE_MOVE_EVENT_TIME_STAMP",
-    APP_ACTION_UPDATE_APP_PERSPECTIVE: "APP_ACTION_UPDATE_APP_PERSPECTIVE",
 });
 
 /* **************************** Updating actions ***************************** */
@@ -22,14 +21,6 @@ const appAction_updateAppMouseMoveEventTimeStamp = (newMouseMoveEventTimeStamp: 
     return {
         type: APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_MOUSE_MOVE_EVENT_TIME_STAMP,
         newMouseMoveEventTimeStamp: newMouseMoveEventTimeStamp,
-    };
-};
-
-const appAction_updateAppPerspective = (newPerspective: number) =>
-{
-    return {
-        type: APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_PERSPECTIVE,
-        newPerspective: newPerspective,
     };
 };
 
@@ -54,26 +45,6 @@ export const appAction_requestToUpdateAppMouseMoveRelatedData = (newMouseMoveEve
         {
             dispatch(appAction_updateAppMouseMoveEventTimeStamp(currentTimestamp)); // Update timestamp to prepare next check
             // dispatch(engineAction_requestToUpdateEngineRotation(mouseMoveX, mouseMoveY));
-        }
-    };
-};
-
-export const appAction_requestToUpdateAppPerspective = (newPerspective: number) =>
-{
-    return (dispatch, getState) =>
-    {
-        let appState: appStateType = getState().appState;
-        let viewportMin: number = window.innerWidth < window.innerHeight
-                                  ? window.innerWidth
-                                  : window.innerHeight;
-        let defaultPerspective: number = viewportMin * 0.8;
-        let perspective: number = newPerspective === undefined
-                                  ? defaultPerspective
-                                  : newPerspective;
-
-        if (perspective !== appState.perspective)
-        {
-            dispatch(appAction_updateAppPerspective(perspective));
         }
     };
 };

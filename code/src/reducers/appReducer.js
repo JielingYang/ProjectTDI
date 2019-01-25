@@ -13,7 +13,6 @@ export type appStateType = {
     top: number,
     maximumRefreshingTimeGap: number,
     mouseMoveEventTimeStamp: number,
-    perspective: number,
 }
 
 const appDefaultState: appStateType = {
@@ -24,7 +23,6 @@ const appDefaultState: appStateType = {
     top: 0,
     maximumRefreshingTimeGap: APP_REFRESHING_TIME_GAP,
     mouseMoveEventTimeStamp: 0,
-    perspective: 0,
 };
 
 // Check reducerCreator for explanation of handlers
@@ -51,12 +49,6 @@ const appReducerHandlers = {
         // No deepCopy here because I don't want the change of mouse move event timestamp to cause re-render of the appComponent
         state.mouseMoveEventTimeStamp = action.newMouseMoveEventTimeStamp;
         return state;
-    },
-    [APP_ACTION_TYPE.APP_ACTION_UPDATE_APP_PERSPECTIVE]: (state: appStateType, action) =>
-    {
-        let nextState: appStateType = deepCopy(state);
-        nextState.perspective = action.newPerspective;
-        return nextState;
     },
 };
 

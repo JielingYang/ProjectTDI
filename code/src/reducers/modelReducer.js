@@ -1,7 +1,11 @@
 import {deepCopy} from "../utilities/UTILITIES";
 import {createReducer} from "./reducerCreator";
+import {COMMON_ACTION_TYPE} from "../actions/commonActions";
+import type {appStateType} from "./appReducer";
+import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
 
-type modelStateType = {
+export type modelStateType = {
+    reducerName: string,
     width: number,
     height: number,
     left: number,
@@ -15,6 +19,7 @@ type modelStateType = {
 }
 
 export const modelDefaultState: modelStateType = {
+    reducerName: REDUCER_NAME.MODEL_REDUCER,
     width: 0,
     height: 0,
     left: 0,
@@ -28,6 +33,18 @@ export const modelDefaultState: modelStateType = {
 };
 
 // Check reducerCreator for explanation of handlers
-const modelReducerHandlers = {};
+const modelReducerHandlers = {
+    [COMMON_ACTION_TYPE.CHANGE_WIDTH_AND_HEIGHT]: (state: modelStateType, action) =>
+    {
+        if (action.reducerName === state.reducerName)
+        {
+            let nextState: appStateType = deepCopy(state);
+            nextState.width = action.newWidth;
+            nextState.height = action.newHeight;
+            return nextState;
+        }
+        return state;
+    },
+};
 
 export default createReducer(modelDefaultState, modelReducerHandlers);

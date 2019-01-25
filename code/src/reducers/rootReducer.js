@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
 import appReducer from "./appReducer";
-import modelsListReducer from "./modelsListReducer";
+import modelsContainerReducer from "./modelsContainerReducer";
 
 const rootReducer = combineReducers({
     appState: appReducer,
-    modelsListState: modelsListReducer,
+    modelsContainerState: modelsContainerReducer,
 });
 
 export default rootReducer;
