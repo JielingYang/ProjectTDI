@@ -3,7 +3,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import type {modelsContainerStateType} from "../reducers/modelsContainerReducer";
 import type {modelStateType} from "../reducers/modelReducer";
-import ModelComponent from "./ModelComponent";
 import {LEVEL1_CONSOLE_FONT, LEVEL1_CONSOLE_PREFIX} from "../utilities/CONSTANTS_CONSOLE_FONT";
 import StyleObject, {STYLE_OBJECT_INITIAL_TYPE} from "../classes/StyleObject";
 import ModelsAxisComponent from "./ModelsAxisComponent";
@@ -21,7 +20,7 @@ const ModelsContainerComponent = (props: ModelsContainerComponentPropsType) =>
 
     let modelsContainerStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(modelsContainerState.width, modelsContainerState.height, modelsContainerState.left, modelsContainerState.top)
-        .setBackgroundColor("rgba(0,0,0,0.9)")
+        .setBackgroundColor("rgba(0,0,0,0.2)")
         .setPerspective(modelsContainerState.perspective)
         .setPointerEvents("none");
 

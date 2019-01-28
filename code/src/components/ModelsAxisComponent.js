@@ -21,8 +21,7 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
 
     let modelsAxisStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(modelsAxisState.width, modelsAxisState.height, modelsAxisState.left, modelsAxisState.top)
-        .setBackgroundColor("rgba(0,0,0,0)")
-        .setBorder(1, "solid", "rgba(255,0,0,0.5)")
+        .setBorder(1, "solid", "rgba(255,0,0,0.1)")
         .addRotationX(modelsAxisState.rotationX)
         .addRotationY(modelsAxisState.rotationY)
         .setTransformStyle("preserve-3d")

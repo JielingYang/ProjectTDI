@@ -41,17 +41,3 @@ export const modelsAxisAction_requestToUpdateAxisRotationXY = (newMouseMoveX: nu
         }
     };
 };
-
-export const modelsAxisAction_requestToUpdateAxisWidthAndHeight = (newWidth: number, newHeight: number) =>
-{
-    return (dispatch, getState) =>
-    {
-        let numberOfModels: number = getState().modelsContainerState.allModels.length;
-
-        dispatch(commonAction_changeWidthAndHeight(newWidth, newHeight, REDUCER_NAME.MODELS_AXIS_REDUCER));
-        for (let i = 0; i < numberOfModels; i++)
-        {
-            dispatch(commonAction_changeWidthAndHeight(newWidth, newHeight, REDUCER_NAME.MODEL_REDUCER, i));
-        }
-    };
-};

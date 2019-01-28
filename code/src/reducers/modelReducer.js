@@ -3,6 +3,7 @@ import {createReducer} from "./reducerCreator";
 import {COMMON_ACTION_TYPE} from "../actions/commonActions";
 import type {appStateType} from "./appReducer";
 import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
+import type {modelsAxisStateType} from "./modelsAxisReducer";
 
 export type modelStateType = {
     reducerName: string,
@@ -38,7 +39,7 @@ const modelReducerHandlers = {
     {
         if (action.reducerName === state.reducerName)
         {
-            let nextState: appStateType = deepCopy(state);
+            let nextState: modelStateType = deepCopy(state);
             nextState.width = action.newWidth;
             nextState.height = action.newHeight;
             return nextState;
@@ -49,9 +50,19 @@ const modelReducerHandlers = {
     {
         if (action.reducerName === state.reducerName)
         {
-            let nextState: appStateType = deepCopy(state);
+            let nextState: modelStateType = deepCopy(state);
             nextState.left = action.newLeft;
             nextState.top = action.newTop;
+            return nextState;
+        }
+        return state;
+    },
+    [COMMON_ACTION_TYPE.CHANGE_Z_DISTANCE]: (state: modelStateType, action) =>
+    {
+        if (action.reducerName === state.reducerName)
+        {
+            let nextState: modelStateType = deepCopy(state);
+            nextState.z = action.newZ;
             return nextState;
         }
         return state;

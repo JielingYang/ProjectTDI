@@ -19,32 +19,34 @@ const ModelComponent = (props: ModelComponentPropsType) =>
 
     let modelStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(model.width, model.height, model.left, model.top)
-        .setBackgroundColor("rgba(0,0,0,0)")
-        .setBorder(1, "solid", "rgba(255,0,0,0.5)")
-        // .addRotationX()
-        // .addRotationY()
+        .setBorder(1, "solid", "rgba(0,225,255,0.1)")
         .setTransformStyle("preserve-3d")
         .setPointerEvents("none");
 
-    let testStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
-        .setBasics("100%", "100%", 0, 0)
-        .setBackgroundColor("rgba(0,0,0,0)")
-        .setBorder(1, "solid", "rgba(0,255,255,0.7)")
+    let modelFacesStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
+        .setBasics(model.width, model.height, 0, 0)
+        .setBorder(1, "solid", "rgba(255,0,0,1)")
         .setTransformStyle("preserve-3d")
         .setPointerEvents("none");
+
+    let translationZ: number = model.width / 2;
+    let modelFrontFacesStyleObject: StyleObject = modelFacesStyleObject
+        .clone()
+        .addTranslationZ(translationZ);
+    let modelLeftFacesStyleObject: StyleObject = modelFacesStyleObject
+        .clone()
+        .addRotationY(-90)
+        .addTranslationZ(translationZ);
+    let modelRightFacesStyleObject: StyleObject = modelFacesStyleObject
+        .clone()
+        .addRotationY(90)
+        .addTranslationZ(translationZ);
 
     console.log(LEVEL3_CONSOLE_PREFIX + model.reducerName + modelIndex, LEVEL3_CONSOLE_FONT);
     return <div style={modelStyleObject.getStyle()}>
-        <div style={testStyleObject.clone().addRotationY(90).getStyle()}>
-            <div
-                style={testStyleObject.clone().setBorder(1, "solid", "rgba(0,255,0,0.8)").addTranslationZ(150).getStyle()}>
-
-                <div
-                    style={testStyleObject.clone().setBorder(1, "solid", "rgba(0,255,0,0.8)").addTranslationZ(150).getStyle()}/>
-            </div>
-        </div>
-
-        <div style={testStyleObject.clone().addRotationY(90).addTranslationZ(-150).getStyle()}/>
+        <div style={modelLeftFacesStyleObject.getStyle()}/>
+        <div style={modelRightFacesStyleObject.getStyle()}/>
+        <div style={modelFrontFacesStyleObject.getStyle()}/>
     </div>;
 };
 
