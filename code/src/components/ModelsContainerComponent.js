@@ -22,6 +22,7 @@ const ModelsContainerComponent = (props: ModelsContainerComponentPropsType) =>
         .setBasics(modelsContainerState.width, modelsContainerState.height, modelsContainerState.left, modelsContainerState.top)
         .setBackgroundColor("rgba(0,0,0,0.2)")
         .setPerspective(modelsContainerState.perspective)
+        .setBoxSizing("border-box")
         .setPointerEvents("none");
 
     console.log(LEVEL1_CONSOLE_PREFIX + props.modelsContainerState.reducerName, LEVEL1_CONSOLE_FONT);

@@ -14,7 +14,7 @@ export const BLUR_LEVEL = Object.freeze({
 /*********************************/
 /* 3d component number constants */
 /*********************************/
-export const MAX_AXIS_ROTATION_DEGREE_VALUE = 40;
+export const MAX_AXIS_ROTATION_DEGREE_VALUE = 90;
 export const DEFAULT_AXIS_ROTATION_X_VALUE = -10;
 export const DEFAULT_AXIS_ROTATION_Y_VALUE = 45;
 

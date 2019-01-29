@@ -1,5 +1,6 @@
 import {commonAction_changeLeftAndTop, commonAction_changeWidthAndHeight} from "./commonActions";
 import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
+import type {modelStateType} from "../reducers/modelReducer";
 
 export const MODEL_ACTION_TYPE = Object.freeze({});
 
@@ -24,16 +25,22 @@ export const modelAction_requestToUpdateAllModelsWidthAndHeight = (newWidth: num
     };
 };
 // Update all models' left and top according to given initial left and top values
-export const modelAction_requestToUpdateAllModelsLeftAndTop = (initialLeft: number, initialTop: number) =>
+export const modelAction_requestToUpdateAllModelsLeftAndTop = () =>
 {
     return (dispatch, getState) =>
     {
         let numberOfModels: number = getState().modelsContainerState.allModels.length;
-        let distance: number = getState().modelsAxisState.height / (numberOfModels - 1);
+        let totalHeight: number = 0;
+        getState().modelsContainerState.allModels.forEach((model: modelStateType) => totalHeight += model.height);
+        let initialTop: number = (getState().modelsAxisState.height - totalHeight) / 2;
+
+        let distance: number = 0;
 
         for (let i = 0; i < numberOfModels; i++)
         {
-            dispatch(commonAction_changeLeftAndTop(initialLeft, initialTop + distance * i, REDUCER_NAME.MODEL_REDUCER, i));
+            let initialLeft: number = (getState().modelsAxisState.width - getState().modelsContainerState.allModels[i].width) / 2;
+            dispatch(commonAction_changeLeftAndTop(initialLeft, initialTop + distance, REDUCER_NAME.MODEL_REDUCER, i));
+            distance += getState().modelsContainerState.allModels[i].height;
         }
     };
 };

@@ -34,7 +34,7 @@ export const modelsContainerAction_requestToUpdateModelsContainerPerspective = (
     return (dispatch, getState) =>
     {
         let modelsContainerState: modelsContainerStateType = getState().modelsContainerState;
-        let defaultPerspective: number = getViewportMin() * 0.8;
+        let defaultPerspective: number = getViewportMin() * 0.9;
         let perspective: number = newPerspective === undefined
                                   ? defaultPerspective
                                   : newPerspective;

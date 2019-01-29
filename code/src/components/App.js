@@ -46,6 +46,10 @@ class App extends Component<AppPropsType>
         this.props.modelsContainerAction_addModel();
         this.props.modelsContainerAction_addModel();
         this.props.modelsContainerAction_addModel();
+        this.props.modelsContainerAction_addModel();
+        this.props.modelsContainerAction_addModel();
+        this.props.modelsContainerAction_addModel();
+        this.props.modelsContainerAction_addModel();
 
         this.appResize(this.props);
 
@@ -83,12 +87,10 @@ class App extends Component<AppPropsType>
         let windowHeight: number = window.innerHeight;
         let viewportMin: number = getViewportMin();
         let axisSize: number = viewportMin / 3;
-        let axisLeft: number = (windowWidth - axisSize) / 2;
+        let axisLeft: number = (windowWidth) / 4;
         let axisTop: number = (windowHeight - axisSize) / 2;
-        let modelsWidth: number = axisSize / 6;
-        let modelsHeight: number = axisSize / 2;
-        let modelsInitialLeft: number = (axisSize - modelsWidth) / 2;
-        let modelsInitialTop: number = -modelsHeight / 2;
+        let modelsWidth: number = axisSize / 4;
+        let modelsHeight: number = axisSize / 3;
         // App component
         props.commonAction_changeWidthAndHeight(windowWidth, windowHeight, REDUCER_NAME.APP_REDUCER);
         // Models container
@@ -99,7 +101,7 @@ class App extends Component<AppPropsType>
         props.commonAction_changeLeftAndTop(axisLeft, axisTop, REDUCER_NAME.MODELS_AXIS_REDUCER);
         // Models
         props.modelAction_requestToUpdateAllModelsWidthAndHeight(modelsWidth, modelsHeight);
-        props.modelAction_requestToUpdateAllModelsLeftAndTop(modelsInitialLeft, modelsInitialTop);
+        props.modelAction_requestToUpdateAllModelsLeftAndTop();
     }
 }
 

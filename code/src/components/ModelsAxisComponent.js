@@ -21,7 +21,8 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
 
     let modelsAxisStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(modelsAxisState.width, modelsAxisState.height, modelsAxisState.left, modelsAxisState.top)
-        .setBorder(1, "solid", "rgba(255,0,0,0.1)")
+        .setBorder(1, "solid", "rgba(255,0,0,0.5)")
+        // .addTranslationZ(200)
         .addRotationX(modelsAxisState.rotationX)
         .addRotationY(modelsAxisState.rotationY)
         .setTransformStyle("preserve-3d")
@@ -32,7 +33,8 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
         {
             models.map((model: modelStateType, modelIndex: number) => <ModelComponent key={modelIndex}
                                                                                       model={model}
-                                                                                      modelIndex={modelIndex}/>)
+                                                                                      modelIndex={modelIndex}
+                                                                                      numberOfModels={models.length}/>)
         }
     </div>;
 };
