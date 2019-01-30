@@ -1,4 +1,4 @@
-import {commonAction_changeLeftAndTop, commonAction_changeWidthAndHeight} from "./commonActions";
+import {commonAction_changeLeftAndTop, commonAction_changeWidthAndHeight, commonAction_setIsMouseOver} from "./commonActions";
 import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
 import type {modelStateType} from "../reducers/modelReducer";
 
@@ -42,5 +42,30 @@ export const modelAction_requestToUpdateAllModelsLeftAndTop = () =>
             dispatch(commonAction_changeLeftAndTop(initialLeft, initialTop + distance, REDUCER_NAME.MODEL_REDUCER, i));
             distance += getState().modelsContainerState.allModels[i].height;
         }
+    };
+};
+
+export const modelAction_requestToSetIsMouseOver = (isMouseOver: boolean, reducerIndex: number) =>
+{
+
+    return (dispatch, getState) =>
+    {
+        getState().modelsContainerState.allModels.forEach((model: modelStateType, index: number) =>
+        {
+            if (reducerIndex === index)
+            {
+                if (isMouseOver !== model.isMouseOver)
+                {
+                    dispatch(commonAction_setIsMouseOver(isMouseOver, REDUCER_NAME.MODEL_REDUCER, reducerIndex))
+                }
+            }
+            else
+            {
+                if (model.isMouseOver)
+                {
+                    dispatch(commonAction_setIsMouseOver(false, REDUCER_NAME.MODEL_REDUCER, index))
+                }
+            }
+        })
     };
 };

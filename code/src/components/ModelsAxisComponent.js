@@ -18,13 +18,14 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
 {
     let modelsAxisState: modelsAxisStateType = props.modelsAxisState;
     let models: Array<modelStateType> = props.models;
+    let mouseOverModelIndex: number = models.findIndex((model: modelStateType, index: number)=> model.isMouseOver );
 
     let modelsAxisStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(modelsAxisState.width, modelsAxisState.height, modelsAxisState.left, modelsAxisState.top)
         .setBorder(1, "solid", "rgba(255,0,0,0.5)")
         // .addTranslationZ(200)
         .addRotationX(modelsAxisState.rotationX)
-        .addRotationY(modelsAxisState.rotationY)
+        .addRotationY(30+modelsAxisState.rotationY)
         .setTransformStyle("preserve-3d")
         .setPointerEvents("none");
 
@@ -34,7 +35,8 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
             models.map((model: modelStateType, modelIndex: number) => <ModelComponent key={modelIndex}
                                                                                       model={model}
                                                                                       modelIndex={modelIndex}
-                                                                                      numberOfModels={models.length}/>)
+                                                                                      numberOfModels={models.length}
+                                                                                      mouseOverModelIndex={mouseOverModelIndex}/>)
         }
     </div>;
 };

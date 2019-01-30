@@ -52,16 +52,6 @@ const modelReducerHandlers = {
         }
         return state;
     },
-    [COMMON_ACTION_TYPE.CHANGE_Z_DISTANCE]: (state: modelsAxisStateType, action) =>
-    {
-        if (action.reducerName === state.reducerName)
-        {
-            let nextState: modelsAxisStateType = deepCopy(state);
-            nextState.z = action.newZ;
-            return nextState;
-        }
-        return state;
-    },
     [MODELS_AXIS_ACTION_TYPE.MODELS_AXIS_ACTION_UPDATE_AXIS_ROTATION_X_Y]: (state: modelsAxisStateType, action) =>
     {
         let nextState: modelsAxisStateType = deepCopy(state);

@@ -63,7 +63,17 @@ const modelsContainerReducerHandlers = {
         }
         return state;
     },
-    [COMMON_ACTION_TYPE.CHANGE_Z_DISTANCE]: (state: modelsContainerStateType, action) =>
+    [COMMON_ACTION_TYPE.SET_IS_MOUSE_OVER]: (state: modelsContainerStateType, action) =>
+    {
+        if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0 && action.reducerIndex < state.allModels.length)
+        {
+            let nextState: modelsContainerStateType = deepCopy(state);
+            nextState.allModels[action.reducerIndex] = modelReducer(nextState.allModels[action.reducerIndex], action);
+            return nextState;
+        }
+        return state;
+    },
+    [COMMON_ACTION_TYPE.SET_IS_SELECTED]: (state: modelsContainerStateType, action) =>
     {
         if (action.reducerName === REDUCER_NAME.MODEL_REDUCER && action.reducerIndex >= 0 && action.reducerIndex < state.allModels.length)
         {

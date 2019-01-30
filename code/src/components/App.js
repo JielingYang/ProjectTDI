@@ -87,7 +87,7 @@ class App extends Component<AppPropsType>
         let windowHeight: number = window.innerHeight;
         let viewportMin: number = getViewportMin();
         let axisSize: number = viewportMin / 3;
-        let axisLeft: number = (windowWidth) / 4;
+        let axisLeft: number = (windowWidth - axisSize) / 2;
         let axisTop: number = (windowHeight - axisSize) / 2;
         let modelsWidth: number = axisSize / 4;
         let modelsHeight: number = axisSize / 3;

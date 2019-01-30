@@ -1,7 +1,6 @@
 import {deepCopy} from "../utilities/UTILITIES";
 import {createReducer} from "./reducerCreator";
 import {COMMON_ACTION_TYPE} from "../actions/commonActions";
-import type {appStateType} from "./appReducer";
 import {REDUCER_NAME} from "../utilities/CONSTANTS_STRING";
 import type {modelsAxisStateType} from "./modelsAxisReducer";
 
@@ -57,12 +56,22 @@ const modelReducerHandlers = {
         }
         return state;
     },
-    [COMMON_ACTION_TYPE.CHANGE_Z_DISTANCE]: (state: modelStateType, action) =>
+    [COMMON_ACTION_TYPE.SET_IS_MOUSE_OVER]: (state: modelStateType, action) =>
     {
         if (action.reducerName === state.reducerName)
         {
             let nextState: modelStateType = deepCopy(state);
-            nextState.z = action.newZ;
+            nextState.isMouseOver = action.isMouseOver;
+            return nextState;
+        }
+        return state;
+    },
+    [COMMON_ACTION_TYPE.SET_IS_SELECTED]: (state: modelStateType, action) =>
+    {
+        if (action.reducerName === state.reducerName)
+        {
+            let nextState: modelStateType = deepCopy(state);
+            nextState.isSelected = action.isSelected;
             return nextState;
         }
         return state;
