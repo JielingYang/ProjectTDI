@@ -21,6 +21,8 @@ type ModelComponentPropsType = {
     model: modelStateType,
     numberOfModels: number,
     mouseOverModelIndex: number,
+    modelsAxisRotationX: number,
+    modelsAxisRotationY: number,
     /* Values from mapStateToProps() */
     /* Functions from matchDispatchToProps() */
     modelAction_requestToSetIsMouseOver: Function
@@ -33,12 +35,15 @@ const ModelComponent = (props: ModelComponentPropsType) =>
     let mouseOverModelIndex: number = props.mouseOverModelIndex;
     let isMouseOver: boolean = model.isMouseOver;
     let isSelected: boolean = model.isSelected;
+    let modelsAxisRotationX: number = props.modelsAxisRotationX;
+    let modelsAxisRotationY: number = props.modelsAxisRotationY;
     let numberOfModels: number = props.numberOfModels;
+    let modelMenuSize: number = model.height * 1.5;
     let isTopModel: boolean = modelIndex === 0;
     let isBottomModel: boolean = modelIndex + 1 === numberOfModels;
     let sideFacesTranslationZ: number = model.width / 2;
     let blurValue: number = mouseOverModelIndex >= 0
-                            ? Math.abs(mouseOverModelIndex - modelIndex) * 0.9
+                            ? Math.abs(mouseOverModelIndex - modelIndex) * 1.2
                             : 0;
     let frontFaceUrl: string = isTopModel
                                ? TopFrontFace
@@ -88,14 +93,31 @@ const ModelComponent = (props: ModelComponentPropsType) =>
         .addRotationY(90)
         .addTranslationZ(sideFacesTranslationZ);
 
+    let modelMenuStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
+        .setBasics(modelMenuSize, modelMenuSize, -(modelMenuSize - model.width) / 2, -(modelMenuSize - model.height) / 2)
+        .setBorderLeft(modelMenuSize / 50, "solid", "rgba(251,185,0,1)")
+        .setBorderRight(modelMenuSize / 50, "solid", "rgba(251,185,0,1)")
+        .setBorderRadius(modelMenuSize / 10)
+        .setOpacity(isMouseOver
+                    ? 1
+                    : 0)
+        .addRotationY(-modelsAxisRotationY)
+        .addRotationX(-modelsAxisRotationX);
+
     console.log(LEVEL3_CONSOLE_PREFIX + model.reducerName + modelIndex, LEVEL3_CONSOLE_FONT);
     return <div style={modelStyleObject.getStyle()}>
         <div style={modelLeftFacesStyleObject.getStyle()}
-             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}/>
+             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}
+             onMouseLeave={() => props.modelAction_requestToSetIsMouseOver(false, modelIndex)}/>
         <div style={modelRightFacesStyleObject.getStyle()}
-             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}/>
+             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}
+             onMouseLeave={() => props.modelAction_requestToSetIsMouseOver(false, modelIndex)}/>
         <div style={modelFrontFacesStyleObject.getStyle()}
-             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}/>
+             onMouseEnter={() => props.modelAction_requestToSetIsMouseOver(true, modelIndex)}
+             onMouseLeave={() => props.modelAction_requestToSetIsMouseOver(false, modelIndex)}/>
+        <div style={modelMenuStyleObject.getStyle()}>
+
+        </div>
     </div>;
 };
 

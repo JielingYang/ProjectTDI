@@ -31,7 +31,7 @@ export const modelsAxisAction_requestToUpdateAxisRotationXY = (newMouseMoveX: nu
         let mouseXToAppWidthRatio: number = newMouseMoveX / getState().appState.width;
         let mouseYToAppHeightRatio: number = newMouseMoveY / getState().appState.height;
 
-        let newRotationX: number = Number(((1 - mouseYToAppHeightRatio) * MAX_AXIS_ROTATION_DEGREE_VALUE - MAX_AXIS_ROTATION_DEGREE_VALUE / 2).toFixed(2));
+        let newRotationX: number = Number((MAX_AXIS_ROTATION_DEGREE_VALUE / 2 - (1 - mouseYToAppHeightRatio) * MAX_AXIS_ROTATION_DEGREE_VALUE).toFixed(2));
         let newRotationY: number = Number((MAX_AXIS_ROTATION_DEGREE_VALUE / 2 - (1 - mouseXToAppWidthRatio) * MAX_AXIS_ROTATION_DEGREE_VALUE).toFixed(2));
 
         // Compare against old values

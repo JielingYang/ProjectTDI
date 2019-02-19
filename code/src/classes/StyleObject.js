@@ -361,6 +361,30 @@ export default class StyleObject
         return this;
     }
 
+    setBorderLeft(borderSize: number, borderStyle: string, borderColor: string)
+    {
+        this.style.borderLeft = borderSize + "px " + borderStyle + " " + borderColor;
+        return this;
+    }
+
+    setBorderRight(borderSize: number, borderStyle: string, borderColor: string)
+    {
+        this.style.borderRight = borderSize + "px " + borderStyle + " " + borderColor;
+        return this;
+    }
+
+    setBorderTop(borderSize: number, borderStyle: string, borderColor: string)
+    {
+        this.style.borderTop = borderSize + "px " + borderStyle + " " + borderColor;
+        return this;
+    }
+
+    setBorderBottom(borderSize: number, borderStyle: string, borderColor: string)
+    {
+        this.style.borderBottom = borderSize + "px " + borderStyle + " " + borderColor;
+        return this;
+    }
+
     setBorderRadius(r1: number, r2: number, r3: number, r4: number)
     {
         let borderRadius: string = r1 + "px ";

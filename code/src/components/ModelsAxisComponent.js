@@ -6,6 +6,7 @@ import StyleObject, {STYLE_OBJECT_INITIAL_TYPE} from "../classes/StyleObject";
 import type {modelsAxisStateType} from "../reducers/modelsAxisReducer";
 import type {modelStateType} from "../reducers/modelReducer";
 import ModelComponent from "./ModelComponent";
+import {DEFAULT_AXIS_ROTATION_X_VALUE} from "../utilities/CONSTANTS_NUMBER";
 
 type ModelsAxisComponentPropsType = {
     /* Values from parent */
@@ -18,14 +19,16 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
 {
     let modelsAxisState: modelsAxisStateType = props.modelsAxisState;
     let models: Array<modelStateType> = props.models;
-    let mouseOverModelIndex: number = models.findIndex((model: modelStateType, index: number)=> model.isMouseOver );
+    let mouseOverModelIndex: number = models.findIndex((model: modelStateType, index: number) => model.isMouseOver);
+    let modelsAxisRotationX: number = modelsAxisState.rotationX;
+    let modelsAxisRotationY: number = DEFAULT_AXIS_ROTATION_X_VALUE + modelsAxisState.rotationY;
 
     let modelsAxisStyleObject: StyleObject = new StyleObject(STYLE_OBJECT_INITIAL_TYPE.DEFAULT)
         .setBasics(modelsAxisState.width, modelsAxisState.height, modelsAxisState.left, modelsAxisState.top)
-        .setBorder(1, "solid", "rgba(255,0,0,0.5)")
+        // .setBorder(1, "solid", "rgba(255,0,0,0.5)")
         // .addTranslationZ(200)
-        .addRotationX(modelsAxisState.rotationX)
-        .addRotationY(30+modelsAxisState.rotationY)
+        .addRotationX(modelsAxisRotationX)
+        .addRotationY(modelsAxisRotationY)
         .setTransformStyle("preserve-3d")
         .setPointerEvents("none");
 
@@ -36,7 +39,9 @@ const ModelsAxisComponent = (props: ModelsAxisComponentPropsType) =>
                                                                                       model={model}
                                                                                       modelIndex={modelIndex}
                                                                                       numberOfModels={models.length}
-                                                                                      mouseOverModelIndex={mouseOverModelIndex}/>)
+                                                                                      mouseOverModelIndex={mouseOverModelIndex}
+                                                                                      modelsAxisRotationX={modelsAxisRotationX}
+                                                                                      modelsAxisRotationY={modelsAxisRotationY}/>)
         }
     </div>;
 };
